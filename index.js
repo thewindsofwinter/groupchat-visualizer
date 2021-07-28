@@ -41,8 +41,11 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     }
 
     // Log first and last message:
-    console.log(obj['messages'][0]);
-    console.log(obj['messages'][obj['messages'].length - 1]);
+    const last_message = obj['messages'][0];
+    const first_message = obj['messages'][obj['messages'].length - 1];
+
+    console.log(first_message);
+    console.log(last_message);
 
     // Loop through messages to get statistics
     for(message in obj['messages']) {
@@ -74,12 +77,18 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
         total_count += message_count[person];
     }
 
-    // Print out total messages
-    console.log("Total messages sent: " + total_count);
-
     // Print raw matrices
     console.log(reaction_network);
     console.log(message_count);
+
+    // Print out total messages
+    console.log("Total messages sent: " + total_count);
+
+    // Print first and last message in human-readable format
+    var start_time = new Date(first_message['timestamp_ms']);
+    var end_time = new Date(last_message['timestamp_ms']);
+
+    console.log("Time range: " + start_time + " to " + end_time);
 
     // Show reaction network in more readable format
     for(reacter in reaction_network) {
