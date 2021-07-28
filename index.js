@@ -1,11 +1,14 @@
 const fs = require('fs');
 
+// Read the file
 fs.readFile('message_1.json', 'utf8' , (err, data) => {
+    // If there's an error, break out
     if (err) {
         console.error(err);
         return;
     }
 
+    // Parse the JSON data and create dictionary to map names to numbers
     const obj = JSON.parse(data);
     var dict = {};
     var rev = {};
@@ -15,6 +18,7 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     }
     // console.log(dict);
 
+    // Create arrays to store data
     var array = [];
     var a2 = [];
     for(var i = 0; i < obj['participants'].length; i++) {
