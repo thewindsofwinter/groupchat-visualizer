@@ -7,7 +7,7 @@ I seek to visualize (likely put into a "report" style PDF after running).
 
  [X] First message, last message, number of messages
  [X] Number of messages sent by any specific person
- [-] Reaction "graph" between people: who reacts to who
+ [ ] Reaction "graph" between people: who reacts to who
     [ ] Normalized by the total number of reactions a person gives out
     [ ] Normalized by the total number of reactions a person receives
     [X] Unnormalized
@@ -15,7 +15,7 @@ I seek to visualize (likely put into a "report" style PDF after running).
  [ ] Graph of replies to messages by any given person
  [ ] Line graph of activity and statistics about activity by weekday or season
  [ ] Information on message length
-    [ ] Versus time 
+    [ ] Versus time
     [ ] By person
 
 This started because I wanted to analyze the interactions between my friends during
