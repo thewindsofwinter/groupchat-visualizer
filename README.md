@@ -31,6 +31,8 @@ be hosted with GitHub Pages) once I've completed this to-do list. Suggestions ar
 ## Using the Visualizer
 
 For now, the project is not very user-friendly, since I'm still developing features.
+The program will spit out raw statistics via the command line that you can then
+format as you please. First, change the path to the message on the first line of
+`index.js` (by default it looks for "message_1.json").
 
-
-Simply type `node index.js`
+To run, simply type `node index.js`.
