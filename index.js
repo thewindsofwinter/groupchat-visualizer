@@ -8,8 +8,17 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
         return;
     }
 
+
     // Parse the JSON data and create dictionary to map names to numbers
     const obj = JSON.parse(data);
+
+
+    // If there aren't any messages, break out
+    if (obj['messages'].length == 0) {
+        console.error("File does not have any data");
+        return;
+    }
+
     var dict = {};
     var rev = {};
     for(participant in obj['participants']) {
@@ -19,17 +28,23 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     // console.log(dict);
 
     // Create arrays to store data
-    var array = [];
-    var a2 = [];
+    var reaction_network = [];
+    var message_count = [];
     for(var i = 0; i < obj['participants'].length; i++) {
         var temp = [];
         for(var j = 0; j < obj['participants'].length; j++) {
             temp.push(0);
         }
-        array.push(temp);
-        a2.push(0);
+
+        reaction_network.push(temp);
+        message_count.push(0);
     }
 
+    // Log first and last message:
+    console.log(obj['messages'][0]);
+    console.log(obj['messages'][obj['messages'].length - 1]);
+
+    // Loop through messages to get statistics
     for(message in obj['messages']) {
         const msg = obj['messages'][message];
         var people = [];
@@ -41,24 +56,35 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
                 const reacter = dict[msg['reactions'][reaction]['actor']];
                 if(!people.includes(reacter)) {
                     people.push(reacter);
-                    array[reacter][sender]++;
+                    reaction_network[reacter][sender]++;
                 }
 
+                // Print out self-react messages for posterity
                 if(reacter == sender) {
                     console.log(msg);
                 }
             }
         }
 
-        a2[sender]++;
+        message_count[sender]++;
     }
 
-    console.log(array);
-    console.log(a2);
+    var total_count = 0;
+    for(person in message_count) {
+        total_count += message_count[person];
+    }
 
-    for(reacter in array) {
-        for(sender in array[reacter]) {
-            console.log(rev[reacter] + " reacted to " + array[reacter][sender] + " messages from " + rev[sender]);
+    // Print out total messages
+    console.log("Total messages sent: " + total_count);
+
+    // Print raw matrices
+    console.log(reaction_network);
+    console.log(message_count);
+
+    // Show reaction network in more readable format
+    for(reacter in reaction_network) {
+        for(sender in reaction_network[reacter]) {
+            console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender] + " messages from " + rev[sender]);
         }
     }
 });
