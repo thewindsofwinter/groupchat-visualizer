@@ -1,0 +1,9 @@
+# Ignore all JSON files
+*.json
+
+# Ignore media in folders
+/audio
+/files
+/gifs
+/photos
+/videos
