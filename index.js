@@ -81,6 +81,13 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     console.log(reaction_network);
     console.log(message_count);
 
+    // Show reaction network in more readable format
+    for(reacter in reaction_network) {
+        for(sender in reaction_network[reacter]) {
+            console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender] + " messages from " + rev[sender]);
+        }
+    }
+
     // Print out total messages
     console.log("Total messages sent: " + total_count);
 
@@ -89,11 +96,8 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     var end_time = new Date(last_message['timestamp_ms']);
 
     console.log("Time range: " + start_time + " to " + end_time);
-
-    // Show reaction network in more readable format
-    for(reacter in reaction_network) {
-        for(sender in reaction_network[reacter]) {
-            console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender] + " messages from " + rev[sender]);
-        }
-    }
+    console.log("First message was sent by " + first_message['sender_name']
+        + " with content: " + first_message['content']);
+    console.log("Last message was sent by " + last_message['sender_name']
+        + " with content: " + last_message['content']);
 });

@@ -18,3 +18,5 @@ I seek to visualize (likely put into a "report" style PDF after running).
 This started because I wanted to analyze the interactions between my friends during
 the coronavirus pandemic. I plan on putting all my things into a website (that might
 be hosted with GitHub Pages) once I've completed this to-do list. Suggestions are welcome!
+
+## Using the Visualizer
