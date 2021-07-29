@@ -39,7 +39,6 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
 
     var messages_by_day = [];
     var content_by_day = [];
-    var end_day = Math.ceil(last_message['timestamp_ms'] / 86400000);
     messages_by_day.push(0);
     content_by_day.push(0);
 
@@ -66,6 +65,7 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     // Log first and last message:
     const last_message = obj['messages'][0];
     const first_message = obj['messages'][obj['messages'].length - 1];
+    var end_day = Math.ceil(last_message['timestamp_ms'] / 86400000);
 
     console.log(first_message);
     console.log(last_message);
@@ -80,7 +80,11 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
             messages_by_day[0]++;
         }
         else {
-            messages_by_day.unshift(1);
+            while(end_day * 86400000 - msg['timestamp_ms'] > 86400000) {
+                messages_by_day.unshift(0);
+                end_day--;
+            }
+            messages_by_day[0]++;
         }
 
         // Check if exists
@@ -126,6 +130,8 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     console.log(recipient_normalized_rn);
     console.log(reacter_normalized_rn);
     console.log(message_count);
+    console.log(messages_by_day.slice(0, 100));
+    console.log(messages_by_day.length);
 
     // Show reaction network in more readable format
     for(reacter in reaction_network) {
