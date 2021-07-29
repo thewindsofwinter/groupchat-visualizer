@@ -119,8 +119,9 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
         for(sender in reaction_network[reacter]) {
             console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender]
                 + " messages from " + rev[sender] + " (% of " + rev[reacter] + "'s reactions: "
-                + reacter_normalized_rn[reacter][sender] + ", % of reactions received by "
-                + rev[sender] + ": " + recipient_normalized_rn[reacter][sender] + ")");
+                + (Math.round(reacter_normalized_rn[reacter][sender] * 100) / 100).toFixed(2)
+                + ", % of reactions received by " + rev[sender] + ": "
+                + (Math.round(recipient_normalized_rn[reacter][sender] * 100) / 100).toFixed(2) + ")");
         }
     }
 
