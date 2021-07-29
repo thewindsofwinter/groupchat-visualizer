@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 // Read the file
+// Bad practice, fix later
 fs.readFile('message_1.json', 'utf8' , (err, data) => {
     // If there's an error, break out
     if (err) {
@@ -29,15 +30,31 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
 
     // Create arrays to store data
     var reaction_network = [];
+    var reacter_normalized_rn = [];
+    var recipient_normalized_rn = [];
+
     var message_count = [];
+    var react_count = [];
+    var received_count = [];
+
     for(var i = 0; i < obj['participants'].length; i++) {
+        // Bad practice, fix later
         var temp = [];
+        var temp2 = [];
+        var temp3 = [];
         for(var j = 0; j < obj['participants'].length; j++) {
             temp.push(0);
+            temp2.push(0);
+            temp3.push(0);
         }
 
         reaction_network.push(temp);
+        reacter_normalized_rn.push(temp2);
+        recipient_normalized_rn.push(temp3);
+
         message_count.push(0);
+        react_count.push(0);
+        received_count.push(0);
     }
 
     // Log first and last message:
@@ -66,6 +83,9 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
                 if(reacter == sender) {
                     console.log(msg);
                 }
+
+                react_count[reacter]++;
+                received_count[sender]++;
             }
         }
 
@@ -77,8 +97,21 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
         total_count += message_count[person];
     }
 
+    for(reacter in reaction_network) {
+        for(sender in reaction_network[reacter]) {
+            recipient_normalized_rn[reacter][sender] =
+                reaction_network[reacter][sender] / received_count[sender];
+
+            reacter_normalized_rn[reacter][sender] =
+                reaction_network[reacter][sender] / react_count[reacter];
+        }
+    }
+
+
     // Print raw matrices
     console.log(reaction_network);
+    console.log(recipient_normalized_rn);
+    console.log(reacter_normalized_rn);
     console.log(message_count);
 
     // Show reaction network in more readable format
