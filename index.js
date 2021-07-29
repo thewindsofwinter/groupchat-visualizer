@@ -37,6 +37,12 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     var react_count = [];
     var received_count = [];
 
+    var messages_by_day = [];
+    var content_by_day = [];
+    var end_day = Math.ceil(last_message['timestamp_ms'] / 86400000);
+    messages_by_day.push(0);
+    content_by_day.push(0);
+
     for(var i = 0; i < obj['participants'].length; i++) {
         // Bad practice, fix later
         var temp = [];
@@ -69,6 +75,13 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
         const msg = obj['messages'][message];
         var people = [];
         const sender = dict[msg['sender_name']];
+
+        if(end_day * 86400000 - msg['timestamp_ms'] < 86400000) {
+            messages_by_day[0]++;
+        }
+        else {
+            messages_by_day.unshift(1);
+        }
 
         // Check if exists
         if(msg['reactions']) {
