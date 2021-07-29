@@ -8,11 +8,10 @@ I seek to visualize (likely put into a "report" style PDF after running).
 ## Target Features
  - [X] First message, last message, number of messages
  - [X] Number of messages sent by any specific person
- - [ ] Reaction "graph" between people: who reacts to who
-    - [ ] Normalized by the total number of reactions a person gives out
-    - [ ] Normalized by the total number of reactions a person receives
-    - [ ] Unnormalized
- - [ ] Mentions of a person's name within messages
+ - [X] Reaction "graph" between people: who reacts to who
+    - [X] Normalized by the total number of reactions a person gives out
+    - [X] Normalized by the total number of reactions a person receives
+    - [X] Unnormalized
  - [ ] Line graph of activity and statistics about activity by weekday or season
  - [ ] Information on message length
     - [ ] Versus time
@@ -22,6 +21,8 @@ I seek to visualize (likely put into a "report" style PDF after running).
  - [ ] Command Line Interface
  - [ ] Generated PDF to output directory
  - [ ] Web generation / upload for ease of access
+
+Likely create charts using Chart.js or similar...
 
 This started because I wanted to analyze the interactions between my friends during
 the coronavirus pandemic. I plan on putting all my things into a website (that might

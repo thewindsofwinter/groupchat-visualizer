@@ -100,10 +100,10 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     for(reacter in reaction_network) {
         for(sender in reaction_network[reacter]) {
             recipient_normalized_rn[reacter][sender] =
-                reaction_network[reacter][sender] / received_count[sender];
+                reaction_network[reacter][sender] * 100 / received_count[sender];
 
             reacter_normalized_rn[reacter][sender] =
-                reaction_network[reacter][sender] / react_count[reacter];
+                reaction_network[reacter][sender] * 100 / react_count[reacter];
         }
     }
 
@@ -117,7 +117,10 @@ fs.readFile('message_1.json', 'utf8' , (err, data) => {
     // Show reaction network in more readable format
     for(reacter in reaction_network) {
         for(sender in reaction_network[reacter]) {
-            console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender] + " messages from " + rev[sender]);
+            console.log(rev[reacter] + " reacted to " + reaction_network[reacter][sender]
+                + " messages from " + rev[sender] + " (% of " + rev[reacter] + "'s reactions: "
+                + reacter_normalized_rn[reacter][sender] + ", % of reactions received by "
+                + rev[sender] + ": " + recipient_normalized_rn[reacter][sender] + ")");
         }
     }
 
